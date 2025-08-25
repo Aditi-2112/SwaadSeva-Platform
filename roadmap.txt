@@ -1,0 +1,218 @@
+🗄️ Database Tables (Suggestion)
+users
+sql
+Copy
+Edit
+id | name | email | password | address | phone | role (user/admin)
+subscriptions
+sql
+Copy
+Edit
+id | user_id | plan_type | start_date | end_date | status
+menu
+sql
+Copy
+Edit
+id | day | meal_time | items | image
+feedback
+sql
+Copy
+Edit
+id | user_id | message | rating | date
+Would you like me to help you:
+
+Design the database schema?
+
+Create login/register in PHP with session?
+
+Build a dynamic menu page with PHP + MySQL?
+
+
+
+
+
+1. Responsive Design:
+Ensure the UI works well on mobile & tablet (media queries if not done yet).
+
+2. Plan Purchase Flow (Optional UI):
+
+UI for selecting & confirming plan purchase.
+
+Maybe a modal or separate buy-plan.php.
+
+3. Error Pages (404, Access Denied)
+Optional, but good to have.
+
+4. Success / Toast Notifications
+Like: "Profile updated", "Payment successful", etc.
+
+5. Theme Toggle or Color Enhancements (Optional)
+You could add a dark mode or improved UI polish later
+
+
+
+
+
+
+
+
+
+INSERT INTO plans (name, description, meal_type, base_price, delivery_charge, includes_delivery, duration_days, total_price)
+VALUES
+-- Single Tiffin (with delivery)
+('Single Tiffin (with Delivery)', 'One-time tiffin with home delivery', 'Any One (Lunch/Dinner)', 100, 20,  'Yes', 1, 120),
+
+-- Single Tiffin (pickup)
+('Single Tiffin (Pickup)', 'Pickup from tiffin center', 'Any One (Lunch/Dinner)', 100, 0, 'No', 1, 100),
+
+-- Monthly Lunch + Dinner
+('Lunch + Dinner', 'Monthly subscription with home delivery', 'Lunch + Dinner', 3000, 0, 'Yes', 30, 3000),
+
+-- Monthly Lunch Only
+('Lunch Only', 'One-time meal monthly subscription', 'Lunch', 2000, 0, 'Yes', 30, 2000),
+
+-- Monthly Dinner Only
+('Dinner Only', 'One-time meal monthly subscription', 'Dinner', 2000, 0, 'Yes', 30, 2000),
+
+-- Premium Plan
+('Breakfast + Lunch + Dinner', 'All meals with premium service', 'Breakfast + Lunch + Dinner', 4000, 0, 'Yes', 30, 4000),
+
+-- Single Tiffin Breakfast(Pickup)
+('Single Tiffin Breakfast(Pickup)', 'One-time tiffin with home delivery', 'Breakfast', 50, 0, 'No', 1, 120),
+
+-- Single Tiffin Breakfast(with delivery)
+('Single Tiffin Breakfast(with Delivery)', 'One-time tiffin with home delivery', 'Breakfast', 50, 20, 'Yes', 1, 120);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/swaadseva/
+├── index.php               (Homepage)
+├── about.php
+├── menu.php
+├── plans.php
+├── contact.php
+├── login.php
+├── register.php
+├── dashboard.php           (User area)
+├── admin/
+│   ├── dashboard.php
+│   ├── manage_users.php
+│   └── orders.php
+├── includes/
+│   ├── db.php              (Database connection)
+│   └── header.php
+│   └── footer.php
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── images/
+└── favicon.ico
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/admin
+
+admin/
+│
+├── index.php              ← Admin login page
+├── dashboard.php          ← Main admin dashboard after login
+│
+├── users.php              ← View, edit, delete registered users
+├── orders.php             ← Manage daily/weekly tiffin deliveries
+├── plans.php              ← See who subscribed to which plan
+├── feedback.php           ← View and manage customer feedback
+├── menu.php               ← Update weekly menu
+├── payments.php           ← View payment and invoice logs
+├── announcements.php      ← Send updates/notifications to users
+│
+├── update-menu.php        ← Process menu update form
+├── logout.php             ← Admin logout
+│
+├── assets/                ← Images, icons, admin CSS/JS
+│   ├── css/
+│   │   └── admin-style.css
+│   ├── js/
+│   │   └── admin-scripts.js
+│   └── icons/
+│       └── (admin icons)
+│
+├── includes/              ← Shared code (header, footer, nav)
+│   ├── header.php
+│   ├── sidebar.php
+│   └── footer.php
+│
+└── database.php           ← DB connection for all admin pages
+
+
+
+
+CREATE TABLE user_plans (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    plan_id INT NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    ALTER TABLE user_plans
+    amount_paid DECIMAL(10,2) DEFAULT 0.00,
+    payment_status VARCHAR(50) DEFAULT 'Pending',
+    subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (plan_id) REFERENCES plans(id) ON DELETE CASCADE
+);
+
+CREATE TABLE plans (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name varchar(100) NOT NULL,
+    description text,
+    meal_type text,
+    duration_days int(11),
+    base_price decimal(8,2),
+    delivery_charge decimal(6,2),
+    includes_delivery text,
+    created_at TIMESTAMP,
+    total_price decimal(10,2),
+);
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name varchar(100) NOT NULL,
+);
+
+CREATE TABLE special_orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    name VARCHAR(100),
+    contact VARCHAR(15),
+    address TEXT,
+    quantity INT,
+    order_price DECIMAL(10,2),
+    payment_status ENUM('Pending', 'Paid') DEFAULT 'Pending',
+    paid_amount DECIMAL(10,2) DEFAULT 0,
+    menu TEXT,
+    order_date DATE,
+    order_time TIME
+);
