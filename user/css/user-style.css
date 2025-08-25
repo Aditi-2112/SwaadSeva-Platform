@@ -1,0 +1,805 @@
+/* Reset */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Baloo 2', cursive;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #FAFAFA;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #FF6F00;
+    border-radius: 10px;
+}
+
+/* Main Content */
+main.user-main {
+    margin-left: 240px;
+    padding: 80px 30px 30px;
+    /* Top padding for topbar */
+}
+
+.page-header h1 {
+    margin-bottom: 10px;
+    color: #FF6F00;
+}
+
+.page-header p {
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background-color: #FF6F00;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    /* allow vertical scroll */
+    scrollbar-width: none;
+    /* Firefox: hide scrollbar */
+}
+
+/* Chrome, Safari, Edge: hide scrollbar */
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.sidebar .brand {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    width: 100%;
+}
+
+.sidebar-menu li a {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-menu li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-menu li a.active {
+    background-color: #e65c00;
+    border-left: 4px solid #fff;
+}
+
+/* Topbar */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 240px;
+    /* This ensures it starts after the sidebar */
+    right: 0;
+    height: 60px;
+    background-color: #fff;
+    display: flex;
+    justify-content: flex-end;
+    /* Push everything to the right */
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+@media (max-width: 768px) {
+    .topbar {
+        left: 0;
+        /* Full width when sidebar is hidden */
+        justify-content: space-between;
+        /* Allow menu button + right content */
+    }
+}
+
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.topbar .admin-name {
+    font-weight: 500;
+    color: #333;
+}
+
+.logout-btn {
+    background-color: #FF6F00;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #e65c00;
+}
+
+/* ===== Mobile Styles ===== */
+.menu-btn {
+    display: none;
+    /* show only on mobile */
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #FF6F00;
+    cursor: pointer;
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 998;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        left: -240px;
+        /* hide off screen */
+    }
+
+    .sidebar.active {
+        left: 0;
+        /* slide in */
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .topbar {
+        margin-left: 0;
+    }
+
+    main.user-main {
+        margin-left: 0;
+        padding: 80px 15px 20px;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+}
+
+
+
+
+/* Table */
+.responsive-table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.responsive-table-container::-webkit-scrollbar {
+    display: none;
+}
+
+.responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.responsive-table thead {
+    background-color: #FF6F00;
+    color: white;
+}
+
+.responsive-table th,
+.responsive-table td {
+    padding: 14px 20px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+}
+
+.responsive-table tbody tr:hover {
+    background-color: #fff5e6;
+}
+
+.menu-filter {
+    margin: 20px 0;
+}
+
+.menu-filter select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.responsive-table td {
+    white-space: normal;
+    /* allow wrapping */
+}
+
+.responsive-table td .pay-btn,
+.responsive-table td .view-btn {
+    display: inline-block;
+    /* stack/wrap on small screens */
+    margin: 4px 0;
+    /* spacing between buttons */
+    white-space: nowrap;
+    /* keep button text in one line */
+}
+
+@media (max-width: 600px) {
+
+    .responsive-table td .pay-btn,
+    .responsive-table td .view-btn {
+        display: block;
+        /* stack vertically */
+        width: 100%;
+        /* full width buttons on mobile */
+    }
+}
+
+
+
+
+
+
+
+/* DashBoard  */
+.notification {
+    background: #ddeefcff;
+    padding: 12px 20px;
+    margin: 15px auto;
+    color: #333;
+    border-left: 5px solid #FF6F00;
+    position: relative;
+    max-width: 1100px;
+    border-radius: 4px;
+}
+
+.notification .close {
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #555;
+    cursor: pointer;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-content {
+    height: 200px;
+    overflow-y: auto;
+}
+
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 14px;
+    margin-top: 10px;
+    background-color: #FF6F00;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #ff4000ff;
+}
+
+.special-order-item {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.dashboard-title {
+    margin-bottom: 10px;
+}
+
+.meal-card {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.meal-tile {
+    flex: 1 1 30%;
+    display: flex;
+    align-items: center;
+    background: #f8f8f8;
+    box-shadow: 0 1px 4px rgba(255, 128, 0, 0.08);
+    min-width: 100px;
+    border-radius: 10px;
+}
+
+.tile-icon {
+    font-size: 38px;
+    opacity: 0.30;
+    margin-right: 10px;
+}
+
+.tile-title {
+    font-size: 20px;
+    color: #555;
+    font-weight: 600;
+}
+
+.tile-count {
+    font-size: 23px;
+    font-weight: bold;
+    color: #FF6F00;
+}
+
+/* Prevent ugly horizontal scroll between 430px and 540px */
+@media (min-width: 430px) and (max-width: 540px) {
+    .card {
+        overflow-x: hidden;
+    }
+
+    .card-content {
+        overflow-x: hidden;
+    }
+
+    .meal-card {
+        display: flex;
+        flex-wrap: wrap;
+        /* allows tiles to wrap instead of overflowing */
+        gap: 10px;
+    }
+
+    .meal-tile {
+        flex: 1 1 calc(50% - 10px);
+        /* two per row */
+        box-sizing: border-box;
+    }
+}
+
+.chart-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 15px auto;
+}
+
+#paymentChart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#result {
+    margin-top: 20px;
+}
+
+.result-bar {
+    height: 20px;
+    background-color: lightgreen;
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+
+canvas[id^="pollChart_"] {
+    max-width: 100%;
+    width: 250px !important;
+    height: 150px !important;
+    margin: auto;
+    display: block;
+}
+
+.poll-message {
+    margin-top: 10px;
+    font-weight: 500;
+    color: green;
+}
+
+.vote-btn {
+    border: none;
+    cursor: pointer;
+}
+
+#pollChart {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.poll-option {
+    margin-bottom: 6px;
+}
+
+.pollForm {
+    margin-top: 10px;
+}
+
+.pollForm .btn.vote-btn {
+    margin-top: 10px;
+}
+
+
+
+/* Plans Page */
+.plans-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.plan-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 25px;
+    width: 280px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.plan-card:hover {
+    transform: translateY(-5px);
+}
+
+.plan-card h3 {
+    color: #FF6F00;
+    margin-bottom: 10px;
+}
+
+.plan-card p {
+    font-size: 15px;
+    color: #444;
+    margin: 6px 0;
+}
+
+.plan-card .price {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 12px;
+    color: #222;
+}
+
+.select-btn {
+    background-color: #FF6F00;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.select-btn:hover {
+    background-color: #e55d00;
+}
+
+.popular {
+    border: 2px solid #FF6F00;
+}
+
+
+/* Orders Page */
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.status.delivered {
+    background-color: #c8e6c9;
+    color: #2e7d32;
+}
+
+.status.pending {
+    background-color: #fff9c4;
+    color: #f57f17;
+}
+
+.status.cancelled {
+    background-color: #ffcdd2;
+    color: #c62828;
+}
+
+
+/* ---------- Feedback Page Styles ---------- */
+.feedback-form {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+}
+
+.feedback-form label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+    margin-top: 20px;
+    color: #333;
+}
+
+.feedback-form textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    font-size: 15px;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.star-rating input:checked~label,
+.star-rating label:hover,
+.star-rating label:hover~label {
+    color: #FFD700;
+}
+
+.submit-btn {
+    background-color: #FF6F00;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #e65c00;
+}
+
+
+/* Feedback Form */
+.feedback-form-container {
+    margin-top: 40px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.feedback-form-container h2 {
+    margin-bottom: 20px;
+    color: #FF6F00;
+    text-align: center;
+}
+
+.feedback-form-container .form-group {
+    margin-bottom: 20px;
+}
+
+.feedback-form-container label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+}
+
+.feedback-form-container input,
+.feedback-form-container select,
+.feedback-form-container textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #fdfdfd;
+}
+
+.feedback-form-container select {
+    background-color: #fff;
+}
+
+.submit-feedback-btn {
+    background-color: #FF6F00;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.submit-feedback-btn:hover {
+    background-color: #e65c00;
+}
+
+
+
+
+
+/* Payment Page */
+
+.paid {
+    color: green;
+    font-weight: 600;
+}
+
+.pending {
+    color: red;
+    font-weight: 600;
+}
+
+/* Payment Action Button */
+.pay-btn {
+    background-color: #FF6F00;
+    color: white;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.pay-btn:hover {
+    background-color: #e65c00;
+}
+
+
+
+
+
+/* Profile Page */
+
+.profile-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 30px auto;
+}
+
+.profile-card form {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-card .form-group {
+    margin-bottom: 20px;
+}
+
+.profile-card label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.profile-card input,
+.profile-card textarea {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    width: 100%;
+    background-color: #fdfdfd;
+}
+
+.profile-card input[readonly],
+.profile-card textarea[readonly] {
+    background-color: #f1f1f1;
+    color: #555;
+    cursor: not-allowed;
+}
+
+/* Buttons */
+.edit-btn,
+.save-btn {
+    background-color: #FF6F00;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    align-self: flex-start;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.edit-btn:hover,
+.save-btn:hover {
+    background-color: #e65c00;
+}
